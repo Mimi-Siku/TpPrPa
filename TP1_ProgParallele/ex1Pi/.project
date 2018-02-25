@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>ex1Pi</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>src/Calcul_PiSurQuatre.java</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/ex2Pi/Calcul_PiSurQuatre.java</locationURI>
+		</link>
+		<link>
+			<name>src/MyThread.java</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/ex2Pi/MyThread.java</locationURI>
+		</link>
+	</linkedResources>
+</projectDescription>
