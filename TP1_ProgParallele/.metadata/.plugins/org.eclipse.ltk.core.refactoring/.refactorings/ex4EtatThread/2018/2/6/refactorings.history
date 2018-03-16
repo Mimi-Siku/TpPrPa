@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move 7 elements to &apos;ex4EtatThread/src&apos;&#x0A;- Original project: &apos;ex4EtatThread&apos;&#x0A;- Destination element: &apos;ex4EtatThread/src&apos;&#x0A;- Original elements:&#x0A;     IntrinsicLock.java&#x0A;     TestJoin.java&#x0A;     IntrinsicLockWaitBis.java&#x0A;     IntrinsicLockWaitTer.java&#x0A;     Sleep.java&#x0A;     Start.java&#x0A;     IntrinsicLockWait.java&#x0A;- Update references to refactored element" description="Move files" destination="/src" element1="IntrinsicLock.java" element2="TestJoin.java" element3="IntrinsicLockWaitBis.java" element4="IntrinsicLockWaitTer.java" element5="Sleep.java" element6="Start.java" element7="IntrinsicLockWait.java" files="7" flags="589830" folders="0" id="org.eclipse.jdt.ui.move" policy="org.eclipse.jdt.ui.moveResources" qualified="false" references="true" stamp="1517938437195" units="0" version="1.0"/>
+</session>
