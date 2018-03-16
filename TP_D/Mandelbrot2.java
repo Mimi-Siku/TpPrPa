@@ -1,11 +1,14 @@
 // -*- coding: utf-8 -*-
 
 import java.awt.Color;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.CountDownLatch;
 
-public class Mandelbrot 
+//import java.util.concurrent.ExecutorService;
+//import java.util.concurrent.Executors;
+//import java.util.concurrent.ExecutorCompletionService;
+//import java.util.concurrent.CompletionService;
+import java.util.concurrent.*;
+
+public class Mandelbrot2
 {
     final static Color noir =  new Color(0, 0, 0);
     final static Color blanc =  new Color(255, 255, 255);
@@ -29,29 +32,29 @@ public class Mandelbrot
         final long startTime = System.nanoTime();
         final long endTime;
         
-        CountDownLatch cdl = new CountDownLatch(taille);
         ExecutorService executeur = Executors.newFixedThreadPool(4);
-        TraceLigne[] tableDesTaches = new TraceLigne[taille];
+        CompletionService<Long> ecs = new ExecutorCompletionService<Long>(executeur);
         int i = 0;
         while (i < taille)
         {
-        	tableDesTaches[i] = new TraceLigne(i, cdl);
-        	executeur.execute(tableDesTaches[i]);
-        	System.out.print("#");
+        	ecs.submit(new TraceLigne(i));
         	i++;
         }
-    	try
-    	{
-    		cdl.await();
-    	}
-    	catch(InterruptedException e) {}
 
-
-//        endTime = System.nanoTime();
-//        final long duree = (endTime - startTime) / 1_000_000 ;
-//        System.out.println("Durée = " + (long) duree + " ms.");
+        for (int k = 0; k < taille; k++)
+        {
+        	try
+        	{
+        		ecs.take();
+        	}
+        	catch(InterruptedException e){}
+        }
+        
+        endTime = System.nanoTime();
+        final long duree = (endTime - startTime) / 1_000_000 ;
+        System.out.println("Durée = " + duree + " ms.");
         image.show();
-    }    
+    }
 
     // La fonction colorierPixel(i,j) colorie le pixel (i,j) de l'image
     public static void colorierPixel(int i, int j) 
@@ -79,25 +82,22 @@ public class Mandelbrot
         return true; // Le point (a,b) est noir
     }
     
-    public static class TraceLigne implements Runnable
+    public static class TraceLigne implements Callable<Long>
     {
     	int line;
-        CountDownLatch cdl;
 
-    	public TraceLigne(int line, CountDownLatch cdl)
+    	public TraceLigne(int line)
     	{
     		this.line = line;
-    		this.cdl = cdl;
     	}
     	
-    	public void run()
+    	public Long call()
     	{
-            for (int j = 0; j < Mandelbrot.taille; j++) 
+            for (int j = 0; j < Mandelbrot2.taille; j++) 
             {
-            	Mandelbrot.colorierPixel(line, j);
+            	Mandelbrot2.colorierPixel(line, j);
             }
-        	cdl.countDown();
-
+            return (long)0;
     	}
     }
 }
